@@ -1,5 +1,5 @@
 *NOTE:* This file is a template that you can use to create the README for your project. The *TODO* comments below will highlight the information you should be sure to include.
-git remote add origin https://github.com/rafapb/nd00333_AZMLND_Capstone.git
+
 # Your Project Title Here
 
 *TODO:* Write a short introduction to your project.
