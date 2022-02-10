@@ -14,7 +14,7 @@ ds = pd.read_csv("data/gridstability.csv")
 
 def clean_data(data):
     
-    x_df = data.to_pandas_dataframe().dropna()
+    x_df = data.dropna()
     x_df.drop("stab", inplace=True, axis=1)
     y_df = x_df.pop("stabf").apply(lambda s: 1 if s == "unstable" else 0)
 
@@ -41,3 +41,6 @@ def main():
 
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
+
+if __name__ == '__main__':
+    main()
