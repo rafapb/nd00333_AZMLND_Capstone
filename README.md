@@ -44,7 +44,7 @@ After reading and cleaning the data, I uploaded it to a datastore on the cloud a
 
 ## Automated ML
 
-These are the AutoML settings and configuration that I chose:
+These are the [AutoML Settings](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-configure-auto-train#configure-your-experiment-settings) and [AutoML Config](https://docs.microsoft.com/en-us/python/api/azureml-train-automl-client/azureml.train.automl.automlconfig.automlconfig?view=azure-ml-py) that I chose:
 
 ```ruby
 automl_settings = {
