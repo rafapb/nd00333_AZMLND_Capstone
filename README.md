@@ -22,11 +22,11 @@ The dataset contains the following features (node 1 refers to the electricty pro
 
 | Feature  | Description |
 | ------------- | ------------- |
-| tau | reaction time of each participant (1 to 4). |
-| p | nominal power consumed or generated of each node (1 to 4). A negative value indicates a net consumption, whereas a positive value indicates net generation. |
-| g | coefficient (gamma) proportional to price elasticity (1 to 4). |
-| stab | the maximal real part of the characteristic equation root. A positive value indicates that the system is linearly unstable. |
-| stabf | the stability label of the system. This is a categorical feature: stable/unstable. |
+| tau | Reaction time of each participant (1 to 4). |
+| p | Nominal power consumed or generated of each node (1 to 4). A negative value indicates a net consumption, whereas a positive value indicates net generation. |
+| g | Coefficient (gamma) proportional to price elasticity (1 to 4). |
+| stab | The maximal real part of the characteristic equation root. A positive value indicates that the system is linearly unstable. |
+| stabf | The stability label of the system. This is a categorical feature: stable/unstable. |
 
 More information can be found in the following papers:
 * [Taming Instabilities in Power Grid Networks by Decentralized Control](https://arxiv.org/pdf/1508.02217.pdf)
