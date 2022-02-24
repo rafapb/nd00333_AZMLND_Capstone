@@ -2,7 +2,7 @@
 
 The stability of the electric power grid is very important becuase stabilities can cause damage to the grid components or even black outs.
 
-In this project, I used Azure Hyperdrive and Azure AutoML to predict the stability of a 4-node star system.
+In this project, I used Azure Hyperdrive and Azure AutoML to predict the stability of a 4-node star system. Then, I deployed the best model and consumed the model endpoint.
 
 The steps followed are:
 
@@ -14,7 +14,7 @@ The steps followed are:
 
 The dataset "Electrical Grid Stability Simulated Data" was obtained from the UCI Machine Learning Repository and can be found [here](https://archive.ics.uci.edu/ml/datasets/Electrical+Grid+Stability+Simulated+Data+#).
 
-The dataset consists of 10000 observations of an electric power grid with four nodes in total, one with electricity generation and three with electricity consumption:
+The dataset consists of 10000 observations of an electric power grid with four nodes in total, one with electricity generation (in the middle) and three with electricity consumption:
 
 ![Diagram](/img/0-Diagram.png)
 
@@ -140,7 +140,5 @@ After consuming the endpoint, we see that the result is 1, meaning that the grid
 ![ConsumptionAndDelete](/img/3-ConsumptionAndDelete.png)
 
 ## Screen Recording
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
-- A working model
-- Demo of the deployed  model
-- Demo of a sample request sent to the endpoint and its response
+
+The screencast of this project can be found [here](https://drive.google.com/file/d/1VnRInb-tPAWVl9N_a05qX6h1g2ZjddD-/view?usp=sharing).
