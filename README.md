@@ -126,7 +126,6 @@ The Logisitc Regression model after training has an accuracy of approximately 82
 ![RunDetails2](/img/2-RunDetails.png)
 
 ## Model Deployment
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
 
 After comparing the results, I deployed the model that we obtained using AutoML using an [Azure Container Instance](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.webservice.aciwebservice?view=azure-ml-py) since it has a higher accuracy.
 
