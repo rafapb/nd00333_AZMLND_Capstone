@@ -6,7 +6,7 @@ In this project, I used Azure Hyperdrive and Azure AutoML to predict the stabili
 
 The steps followed are:
 
-![Project Diagram](img\0-ProjectDiagram.png)
+![Project Diagram](/img/0-ProjectDiagram.png)
 
 ## Dataset
 
@@ -16,7 +16,7 @@ The dataset "Electrical Grid Stability Simulated Data" was obtained from the UCI
 
 The dataset consists of 10000 observations of an electric power grid with four nodes in total, one with electricity generation and three with electricity consumption:
 
-![Diagram](img\0-Diagram.png)
+![Diagram](/img/0-Diagram.png)
 
 The dataset contains the following features (node 1 refers to the electricty producer, whereas nodes 2 to 4 refers to the electricity consumer):
 
@@ -36,7 +36,7 @@ Therefore, it is a classification problem in which we want to predict the stabf 
 
 For this task, we use the features mentioned above except for stab, since we are using its categorical feature stabf.
 
-![Dataset](img\0-Dataset.png)
+![Dataset](/img/0-Dataset.png)
 
 ### Access
 
@@ -87,9 +87,9 @@ automl_config = AutoMLConfig(compute_target = compute_target,
 
 The best performing AutoML model is a an [Ensemble model](https://en.wikipedia.org/wiki/Ensemble_learning) with an accuracy of approximately 94%.
 
-![GetDetails1](img\1-GetDetails.png)
+![GetDetails1](/img/1-GetDetails.png)
 
-![RunDetails1](img\1-RunDetails.png)
+![RunDetails1](/img/1-RunDetails.png)
 
 ## Hyperparameter Tuning
 
@@ -121,9 +121,9 @@ hd_config = HyperDriveConfig(run_config=src,
 
 The Logisitc Regression model after training has an accuracy of approximately 82% and values C = 1 and max_iter = 50.
 
-![Hyperparameters](img\2-Hyperparameters.png)
+![Hyperparameters](/img/2-Hyperparameters.png)
 
-![RunDetails2](img\2-RunDetails.png)
+![RunDetails2](/img/2-RunDetails.png)
 
 ## Model Deployment
 *TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
@@ -132,13 +132,13 @@ After comparing the results, I deployed the model that we obtained using AutoML 
 
 After the deployment, a REST API endpoint is available. In the Consume tab of the endpoint, there are the REST endpoint and authentication keys, which are used in the endpoint script to make a prediction based on input values. 
 
-![APIDetails](img\3-APIDetails.png)
-![APIConsume](img\3-APIConsume.png)
-![Endpoint](img\3-Endpoint.png)
+![APIDetails](/img/3-APIDetails.png)
+![APIConsume](/img/3-APIConsume.png)
+![Endpoint](/img/3-Endpoint.png)
 
 After consuming the endpoint, we see that the result is 1, meaning that the grid is unstable based on those conditions. Finally, we can delete the service.
 
-![ConsumptionAndDelete](img\3-ConsumptionAndDelete.png)
+![ConsumptionAndDelete](/img/3-ConsumptionAndDelete.png)
 
 ## Screen Recording
 *TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
