@@ -20,11 +20,13 @@ The dataset consists of 10000 observations of an electric power grid with four n
 
 The dataset contains the following features (node 1 refers to the electricty producer, whereas nodes 2 to 4 refers to the electricity consumer):
 
-    - tau: reaction time of each participant (1 to 4).
-    - p: nominal power consumed or generated of each node (1 to 4). A negative value indicates a net consumption, whereas a positive value indicates net generation.
-    - g: coefficient (gamma) proportional to price elasticity (1 to 4).
-    - stab: the maximal real part of the characteristic equation root. A positive value indicates that the system is linearly unstable.
-    - stabf: the stability label of the system. This is a categorical feature: stable/unstable.
+| Feature  | Description |
+| ------------- | ------------- |
+| tau | reaction time of each participant (1 to 4). |
+| p | nominal power consumed or generated of each node (1 to 4). A negative value indicates a net consumption, whereas a positive value indicates net generation. |
+| g | coefficient (gamma) proportional to price elasticity (1 to 4). |
+| stab | the maximal real part of the characteristic equation root. A positive value indicates that the system is linearly unstable. |
+| stabf | the stability label of the system. This is a categorical feature: stable/unstable. |
 
 More information can be found in the following papers:
 * [Taming Instabilities in Power Grid Networks by Decentralized Control](https://arxiv.org/pdf/1508.02217.pdf)
@@ -127,7 +129,7 @@ The Logisitc Regression model after training has an accuracy of approximately 82
 
 ## Model Deployment
 
-After comparing the results, I deployed the model that we obtained using AutoML using an [Azure Container Instance](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.webservice.aciwebservice?view=azure-ml-py) since it has a higher accuracy.
+After comparing the results, I [deployed](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-and-where?tabs=python) the model that we obtained using AutoML using an [Azure Container Instance](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.webservice.aciwebservice?view=azure-ml-py) since it has a higher accuracy.
 
 After the deployment, a REST API endpoint is available. In the Consume tab of the endpoint, there are the REST endpoint and authentication keys, which are used in the endpoint script to make a prediction based on input values. 
 
