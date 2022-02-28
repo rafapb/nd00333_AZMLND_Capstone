@@ -36,7 +36,8 @@ More information can be found in the following papers:
 The aim of this project is to develop a machine learning model that can predict the stability of the system based on the features of the dataset.
 Therefore, it is a classification problem in which we want to predict the stabf value.
 
-For this task, we use the features mentioned above except for stab, since we are using its categorical feature stabf.
+For this task, we use the features mentioned above except for stab, since we are using its categorical feature stabf. 
+The following image shows the first five observations of the clean dataset: 
 
 ![Dataset](/img/0-Dataset.png)
 
@@ -87,9 +88,13 @@ automl_config = AutoMLConfig(compute_target = compute_target,
 
 ### Results
 
-The best performing AutoML model is a an [Ensemble model](https://en.wikipedia.org/wiki/Ensemble_learning) with an accuracy of approximately 94%.
+The best performing AutoML model is a a [LightGBM](https://en.wikipedia.org/wiki/LightGBM) with an accuracy of approximately 94%.
+
+The following image shows a screenshot of the details of the best run:
 
 ![GetDetails1](/img/1-GetDetails.png)
+
+The following image shows a screenshot of the RunDetials widget of the AutoML run:
 
 ![RunDetails1](/img/1-RunDetails.png)
 
@@ -123,24 +128,72 @@ hd_config = HyperDriveConfig(run_config=src,
 
 The Logisitc Regression model after training has an accuracy of approximately 82% and values C = 1 and max_iter = 50.
 
+The following image shows a screenshot of the hyperparameters of the best model:
+
 ![Hyperparameters](/img/2-Hyperparameters.png)
+
+The following image shows a screenshot of the RunDetials widget of the HyperDrive run:
 
 ![RunDetails2](/img/2-RunDetails.png)
 
 ## Model Deployment
 
-After comparing the results, I [deployed](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-and-where?tabs=python) the model that we obtained using AutoML using an [Azure Container Instance](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.webservice.aciwebservice?view=azure-ml-py) since it has a higher accuracy.
+After comparing the results, I [deployed](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-and-where?tabs=python) the model that we obtained using AutoML using an [Azure Container Instance (ACI)](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.webservice.aciwebservice?view=azure-ml-py) since it has a higher accuracy.
 
 After the deployment, a REST API endpoint is available. In the Consume tab of the endpoint, there are the REST endpoint and authentication keys, which are used in the endpoint script to make a prediction based on input values. 
 
-![APIDetails](/img/3-APIDetails.png)
-![APIConsume](/img/3-APIConsume.png)
-![Endpoint](/img/3-Endpoint.png)
+The following image shows ACI web service configuration:
 
-After consuming the endpoint, we see that the result is 1, meaning that the grid is unstable based on those conditions. Finally, we can delete the service.
+![ACI](/img/3-ACI.png)
+
+We download the scoring file that AutoML created automatically and use it as our entry script together with our environment to set up our inference configuration.
+We configure the endpoint deployment configuration.
+We deploy the model and then it is ready to be consumed.
+
+More information can be found [here](https://stackoverflow.com/questions/66437607/how-to-create-azure-ml-inference-config-and-deployment-config-class-objects-from) and [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-and-where?tabs=python).
+
+```ruby
+service_name = 'gridstability-api'
+script_file_name = 'score.py'
+
+best_run.download_file('outputs/scoring_file_v_1_0_0.py', script_file_name)
+best_run_env = best_run.get_environment()
+inference_config = InferenceConfig(entry_script=script_file_name, environment=best_run_env)
+
+aci_config = AciWebservice.deploy_configuration(cpu_cores=1, memory_gb=1, auth_enabled=True, enable_app_insights=True)
+
+service = Model.deploy(workspace=ws,
+                       name=service_name,
+                       models=[model],
+                       inference_config=inference_config,
+                       deployment_config=aci_config,
+                       overwrite=True)
+service.wait_for_deployment(show_output=True)
+```
+
+In Endpoints, we can see that the gridstability-api is healthy:
+
+![APIDetails](/img/3-APIDetails.png)
+
+In the Consume tab of the endpoint, we can see the REST endpoint and authentication keys:
+
+![APIConsume](/img/3-APIConsume.png)
+
+We copy the REST endpoint and primary authentication key to the score.py script, where we also include some sample data:
+
+![EndpointScript](/img/3-EndpointScript.png)
+
+Then, we run the endpoint script. After consuming the endpoint, we see that the result is 1, meaning that the grid is unstable based on those conditions:
 
 ![ConsumptionAndDelete](/img/3-ConsumptionAndDelete.png)
 
+Finally, we can delete the service to avoid incurring in extra costs.
+
 ## Screen Recording
 
-The screencast of this project can be found [here](https://drive.google.com/file/d/1VnRInb-tPAWVl9N_a05qX6h1g2ZjddD-/view?usp=sharing).
+The screencast of this project can be found [here](https://www.youtube.com/watch?v=xT_gqpj66kU).
+
+## Future Work
+
+* Export the model to support [ONNX](https://docs.microsoft.com/en-us/azure/machine-learning/concept-onnx).
+* Retrain the model periodically with more recent data and [monitor data drift](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-monitor-datasets?tabs=python).
