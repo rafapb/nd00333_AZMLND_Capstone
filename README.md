@@ -99,7 +99,7 @@ The following image shows a screenshot of the RunDetials widget of the AutoML ru
 
 ![RunDetailsAutoML](/img/1-RunDetails.png)
 
-The following image shows a screenshot of the details of the best model:
+The following image shows a screenshot of the details of the best model, including the model's hyperparameters:
 
 ![BestModelAutoML](/img/1-FitModel.png)
 
