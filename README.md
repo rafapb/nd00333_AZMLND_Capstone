@@ -93,11 +93,15 @@ The best performing AutoML model is a a [LightGBM](https://en.wikipedia.org/wiki
 
 The following image shows a screenshot of the details of the best run:
 
-![GetDetails1](/img/1-GetDetails.png)
+![GetDetailsAutoML](/img/1-GetDetails.png)
 
 The following image shows a screenshot of the RunDetials widget of the AutoML run:
 
-![RunDetails1](/img/1-RunDetails.png)
+![RunDetailsAutoML](/img/1-RunDetails.png)
+
+The following image shows a screenshot of the details of the best model:
+
+![BestModelAutoML](/img/1-FitModel.png)
 
 ## Hyperparameter Tuning
 
@@ -135,7 +139,7 @@ The following image shows a screenshot of the hyperparameters of the best model:
 
 The following image shows a screenshot of the RunDetials widget of the HyperDrive run:
 
-![RunDetails2](/img/2-RunDetails.png)
+![RunDetailsHD](/img/2-RunDetails.png)
 
 ## Model Deployment
 
