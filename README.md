@@ -51,12 +51,10 @@ These are the [AutoML Settings](https://docs.microsoft.com/en-us/azure/machine-l
 
 ```ruby
 automl_settings = {
-    "experiment_timeout_minutes": 20,
+    "experiment_timeout_minutes": 15,
     "max_concurrent_iterations": 5,
-    "primary_metric" : 'accuracy',
-    "blocked_models": ['XGBoostClassifier']
+    "primary_metric" : 'accuracy'
 }
-
 automl_config = AutoMLConfig(compute_target = compute_target,
                              task = "classification",
                              training_data = ds,
@@ -66,16 +64,17 @@ automl_config = AutoMLConfig(compute_target = compute_target,
                              enable_early_stopping = True,
                              featurization = 'auto',
                              debug_log = "automl_errors.log",
+                             enable_voting_ensemble=False,
+                             enable_stack_ensemble=False,
                              **automl_settings
                             )
 ```
 
 | Parameter  | Description |
 | ------------- | ------------- |
-| experiment_timeout_minutes  | 20 minutes. This is the maximum number of minutes that the experiment will run for in order to avoid extra costs. |
+| experiment_timeout_minutes  | 15 minutes. This is the maximum number of minutes that the experiment will run for in order to avoid extra costs. |
 | max_concurrent_iterations | 5 iterations. This is the maximum number of iterations that will be run in parallel. |
 | primary_metric  | accuracy. This is the [metric](https://docs.microsoft.com/en-us/python/api/azureml-automl-core/azureml.automl.core.shared.constants.metric?view=azure-ml-py) that will be used to determine the best model. Accuracy is the proportion of true results among the total number of cases examined and it is used in this case because there is no class imbalance. |
-| blocked_models | 'XGBoostClassifier'. This is the list of models that will not be evaluated. In this case, I choose to block the XGBoostClassifier model because to see how this setting works. |
 | compute_target | compute_target defined. This is the compute target that will be used to run the experiment. |
 | task | 'classification'. This is the task that we want to perform according to our problem. |
 | training_data | ds. This is the dataset that we want to use to train our model. It includes the features and the labels. |
@@ -85,6 +84,8 @@ automl_config = AutoMLConfig(compute_target = compute_target,
 | enable_early_stopping | True. This is the flag that indicates if we want to stop the experiment once the results seem not to improve with new iterations. |
 | featurization | "auto". This indicates that the featurization will be automatically performed. |
 | debug_log | "automl_errors.log". This is the file where the debug information will be logged. |
+| enable_voting_ensemble | False. This is the flag that enables or disables using a voting ensemble model. |
+| enable_stack_ensemble | False. This is the flag that enables or disables using a stack ensemble model. |
 
 ### Results
 
@@ -142,7 +143,7 @@ After comparing the results, I [deployed](https://docs.microsoft.com/en-us/azure
 
 After the deployment, a REST API endpoint is available. In the Consume tab of the endpoint, there are the REST endpoint and authentication keys, which are used in the endpoint script to make a prediction based on input values. 
 
-The following image shows ACI web service configuration:
+The following image shows the ACI web service configuration:
 
 ![ACI](/img/3-ACI.png)
 
