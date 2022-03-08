@@ -1,6 +1,6 @@
 # Predicting Electric Grid Stability on AzureML
 
-The stability of the electric power grid is very important becuase stabilities can cause damage to the grid components or even black outs.
+The stability of the electric power grid is very important because system instability can cause damage to the grid components or even black-outs.
 
 In this project, I used Azure Hyperdrive and Azure AutoML to predict the stability of a 4-node star system. Then, I deployed the best model and consumed the model endpoint.
 
